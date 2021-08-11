@@ -29,8 +29,7 @@ class UserController(BaseController):
         Get all users from the database.
 
 
-        If the argument `sound` isn't passed in, the default Animal
-        sound is used.
+        If the argument `db_name` isn't passed in, the default fine "users.csv" will be used.
 
         Parameters
         ----------

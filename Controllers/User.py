@@ -147,7 +147,7 @@ class UserController(BaseController):
                     [user.id, user.fullname, user.email, user.phone])
 
     @classmethod
-    def update(self, user: 'User') -> None:
+    def update(self, id: int, fullname: str, email: str, phone: str) -> None:
         """
         Update a user.
 
@@ -164,9 +164,34 @@ class UserController(BaseController):
         self.get_all()
 
         for user in self.users:
-            if user.id == user.id:
+            if user.id == id:
+                user.fullname = fullname
+                user.email = email
+                user.phone = phone
+                self.write_data()
+                return
+        raise ValueError("User not found.")
+
+    @classmethod
+    def delete(self, id: int) -> None:
+        """
+        Delete a user.
+
+        Parameters
+        ----------
+        id : int
+            The id of the user to delete.
+
+        Raises
+        ------
+        ValueError
+            User not found.
+        """
+        self.get_all()
+
+        for user in self.users:
+            if user.id == id:
                 self.users.remove(user)
-                self.users.append(user)
                 self.write_data()
                 return
         raise ValueError("User not found.")
